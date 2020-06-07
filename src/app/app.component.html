@@ -1,10 +1,12 @@
 <app-headerboard></app-headerboard>
-<app-stats-display
+<app-stats-display *ngIf="!isWaiting"
     [queriedCountry]="queriedCountry"
     [queriedDate]="queriedDate"
     [cases]="cases | toArray"
     [deaths]="deaths | toArray"
     [tests]="tests | toArray"></app-stats-display>
+<app-loading-indicator *ngIf="isWaiting"></app-loading-indicator>
+<br/>
 <app-dropdown
     (countryChange)="changeSelectedCountry($event)"></app-dropdown>
 <input

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { StatsDisplayComponent } from './stats-display/stats-display.component';
@@ -18,7 +19,8 @@ import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator
     LoadingIndicatorComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

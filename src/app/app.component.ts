@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   selectedDate: string = '';
   queriedCountry: string = '';
   queriedDate: string = '';
+  isWaiting: boolean = false;
 
   changeSelectedCountry(newCountry: string): void {
     this.selectedCountry = newCountry;
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   queryAPI() {
+    this.isWaiting = true;
     fetch(`https://covid-193.p.rapidapi.com/history?day=${this.selectedDate}&country=${this.selectedCountry}`, {
           "method": "GET",
           "headers": {
@@ -33,6 +35,8 @@ export class AppComponent implements OnInit {
     })
     .then(response => response.json())
     .then(responseJson => {
+      // turn off loading icon
+      this.isWaiting = false;
       // confirm query strings
       this.queriedCountry = this.selectedCountry;
       this.queriedDate = this.selectedDate;

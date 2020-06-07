@@ -1,1 +1,10 @@
-<p>loading-indicator works!</p>
+<svg>
+    <circle 
+        cx="45%" cy="30%" r="30"
+        (@loading.done)="toggle()"
+        [@loading]="animationFlag ? 'start' : 'end'"
+    />
+    <circle 
+        cx="55%" cy="60%" r="30"
+        [@loading]="animationFlag ? 'end' : 'start'" />
+</svg>
