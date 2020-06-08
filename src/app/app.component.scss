@@ -3,12 +3,14 @@ input {
 }
 
 button {
+    background-color: white;
+    margin: 0 10px;
     padding: 7px 10px;
     border-radius: 7px;
 }
 
 button:hover {
-    background-color: lightgrey;
+    background-color: whitesmoke;
 }
 
 button:focus {
@@ -22,6 +24,14 @@ button:focus {
     justify-content: center;
     align-items: center;
 }
+
+#user-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 @media only screen and (max-width: 900px) {
     #main-content {
       flex-direction: column
