@@ -1,11 +1,14 @@
-<h2 *ngIf="cases.length">{{queriedDate}} COVID19 data for {{queriedCountry}}</h2>
-<h2 *ngIf="cases.length === 0 && queriedCountry">No data found for {{queriedCountry}} on {{queriedDate}}</h2>
+<h3 *ngIf="cases.length">Latest {{queriedDate}} COVID19 data for {{queriedCountry}}</h3>
+<i *ngIf="cases.length">Click variable names to graph them over time</i>
+<h3 *ngIf="cases.length === 0 && queriedCountry">No data found for {{queriedCountry}} on {{queriedDate}}</h3>
 <ul *ngIf="cases.length">
     <li>
-        <h2>Cases</h2>
+        <h4>Cases</h4>
         <table>
             <tr>
-                <th *ngFor="let case of cases">{{case[0]}} </th>
+                <th *ngFor="let case of cases"
+                    (click)="changeYVariable(['cases', case[0]])">
+                    {{case[0]}} </th>
             </tr>
             <tr>
                 <td *ngFor="let case of cases">{{case[1] || 0}}</td>
@@ -13,10 +16,12 @@
         </table>
     </li>
     <li>
-        <h2>Deaths</h2>
+        <h4>Deaths</h4>
         <table>
             <tr>
-                <th *ngFor="let death of deaths">{{death[0]}} </th>
+                <th *ngFor="let death of deaths" 
+                    (click)="changeYVariable(['deaths', death[0]])">
+                    {{death[0]}} </th>
             </tr>
             <tr>
                 <td *ngFor="let death of deaths">{{death[1] || 0}}</td>
@@ -24,10 +29,12 @@
         </table>
     </li>
     <li>
-        <h2>Tests</h2>
+        <h4>Tests</h4>
         <table>
             <tr>
-                <th *ngFor="let test of tests">{{test[0]}} </th>
+                <th *ngFor="let test of tests"
+                    (click)="changeYVariable(['tests', test[0]])">
+                    {{test[0]}}</th>
             </tr>
             <tr>
                 <td *ngFor="let test of tests">{{test[1] || 0}}</td>

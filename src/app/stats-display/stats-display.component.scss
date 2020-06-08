@@ -4,15 +4,34 @@
     border: 0;
 }
 
-td, th, table {
+td, th {
     border: 1px black solid;
 }
 
-table {
-    background-color: black;
+th {
+    cursor: pointer;
 }
+th:hover {
+    background-color: rgb(235, 235, 235);
+    box-shadow: inset 1px 1px 3px rgb(200, 200, 200);
+    transition: 0.3s;
+}
+th:active {
+    background-color: rgb(215, 215, 215);
+    box-shadow: inset 2px 2px 4px rgb(180, 180, 180);
+}
+
+// table {
+//     background-color: black;
+// }
 
 td, th {
     background-color: white;
     padding: 10px;
+}
+
+h3 {
+    padding: 20px auto;
+    width: 100%;
+    margin: 10px auto;
 }

@@ -1,12 +1,4 @@
 <app-headerboard></app-headerboard>
-<app-stats-display *ngIf="!isWaiting"
-    [queriedCountry]="queriedCountry"
-    [queriedDate]="queriedDate"
-    [cases]="cases | toArray"
-    [deaths]="deaths | toArray"
-    [tests]="tests | toArray"></app-stats-display>
-<app-loading-indicator *ngIf="isWaiting"></app-loading-indicator>
-<br/>
 <app-dropdown
     (countryChange)="changeSelectedCountry($event)"></app-dropdown>
 <input
@@ -16,3 +8,17 @@
     type="date" />
 <br/>
 <button (click)="queryAPI()">Display</button>
+<div id="main-content">
+<app-stats-display *ngIf="!isWaiting"
+    [queriedCountry]="queriedCountry"
+    [queriedDate]="queriedDate"
+    [cases]="mostRecentCases | toArray"
+    [deaths]="mostRecentDeaths | toArray"
+    [tests]="mostRecentTests | toArray"
+    (newYVariable)="changeYVariable($event)"></app-stats-display>
+<app-data-graph
+    [yVariable]="yVariable"
+    [category]="yVariableCategory"
+    [timelineData]="fullDailyData"></app-data-graph>
+</div>
+<app-loading-indicator *ngIf="isWaiting"></app-loading-indicator>

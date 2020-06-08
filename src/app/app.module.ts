@@ -8,6 +8,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { ToArrayPipe } from './to-array.pipe';
 import { HeaderboardComponent } from './headerboard/headerboard.component';
 import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
+import { DataGraphComponent } from './data-graph/data-graph.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator
     DropdownComponent,
     ToArrayPipe,
     HeaderboardComponent,
-    LoadingIndicatorComponent
+    LoadingIndicatorComponent,
+    DataGraphComponent
   ],
   imports: [
     BrowserModule,

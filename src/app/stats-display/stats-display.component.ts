@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-stats-display',
@@ -15,6 +15,12 @@ export class StatsDisplayComponent implements OnInit {
   @Input() cases: [string, any][];
   @Input() deaths: [string, any][];
   @Input() tests: [string, any][];
+
+  @Output() newYVariable = new EventEmitter();
+
+  changeYVariable(values: string[]) {
+    this.newYVariable.emit(values)
+  }
 
   ngOnInit(): void {
   }

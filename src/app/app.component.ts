@@ -7,13 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'COVID19Stats';
-  cases: object = {};
-  deaths: object = {};
-  tests: object = {};
+
+  mostRecentCases: object = {};
+  mostRecentDeaths: object = {};
+  mostRecentTests: object = {};
+  fullDailyData: object[] = null;
+
   selectedCountry: string = '';
   selectedDate: string = '';
   queriedCountry: string = '';
   queriedDate: string = '';
+
+  yVariable: string = "cases";
+  yVariableCategory: string = "active";
+
   isWaiting: boolean = false;
 
   changeSelectedCountry(newCountry: string): void {
@@ -24,7 +31,16 @@ export class AppComponent implements OnInit {
     this.selectedDate = newDate;
   }
 
+  changeYVariable(newYVariable: string[]) {
+    this.yVariable = newYVariable[0];
+    this.yVariableCategory = newYVariable[1];
+  }
+
   queryAPI() {
+    if (this.selectedCountry == '') {
+      return;
+    }
+    this.fullDailyData = null;
     this.isWaiting = true;
     fetch(`https://covid-193.p.rapidapi.com/history?day=${this.selectedDate}&country=${this.selectedCountry}`, {
           "method": "GET",
@@ -35,15 +51,29 @@ export class AppComponent implements OnInit {
     })
     .then(response => response.json())
     .then(responseJson => {
-      // turn off loading icon
-      this.isWaiting = false;
-      // confirm query strings
-      this.queriedCountry = this.selectedCountry;
-      this.queriedDate = this.selectedDate;
-      //set response data
-      this.cases = (responseJson.response[0] && responseJson.response[0].cases) || {};
-      this.deaths = (responseJson.response[0] && responseJson.response[0].deaths) || {};
-      this.tests = (responseJson.response[0] && responseJson.response[0].tests) || {};
+      // get full history
+        fetch(`https://covid-193.p.rapidapi.com/history?country=${this.selectedCountry}`, {
+            "method": "GET",
+            "headers": {
+              "x-rapidapi-host": "covid-193.p.rapidapi.com",
+              "x-rapidapi-key": "93676dd7d2mshe8e58bcb99bd228p1e80e8jsn09ed48cb759e"
+            }
+        })
+        .then(response => response.json())
+        .then(responseJsonFull => {
+          // turn off loading icon
+          this.isWaiting = false;
+
+          // confirm query strings
+          this.queriedCountry = this.selectedCountry;
+          this.queriedDate = this.selectedDate;
+
+          //set response data
+          this.fullDailyData = responseJsonFull.response || null;
+          this.mostRecentCases = (responseJson.response[0] && responseJson.response[0].cases) || {};
+          this.mostRecentDeaths = (responseJson.response[0] && responseJson.response[0].deaths) || {};
+          this.mostRecentTests = (responseJson.response[0] && responseJson.response[0].tests) || {};
+        })
     })
     .catch(err => {
       console.log(err);
