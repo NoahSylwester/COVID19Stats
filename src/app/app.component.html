@@ -18,6 +18,7 @@
         [tests]="mostRecentTests | toArray"
         (newYVariable)="changeYVariable($event)"></app-stats-display>
     <app-data-graph
+        [currentDate]="currentDate"
         [yVariable]="yVariable"
         [category]="yVariableCategory"
         [timelineData]="fullDailyData"></app-data-graph>

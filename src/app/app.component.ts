@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   mostRecentTests: object = {};
   fullDailyData: object[] = null;
 
+  currentDate: string = '';
   selectedCountry: string = '';
   selectedDate: string = '';
   queriedCountry: string = '';
@@ -86,5 +87,6 @@ export class AppComponent implements OnInit {
     let mm: string = (today.getMonth() + 1).toString().padStart(2, '0');
     let yyyy: string = today.getFullYear().toString();
     this.selectedDate = `${yyyy}-${mm}-${dd}`;
+    this.currentDate = `${yyyy}-${mm}-${dd}`;
   }
 }

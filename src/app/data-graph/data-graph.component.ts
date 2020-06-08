@@ -15,6 +15,7 @@ export class DataGraphComponent implements OnChanges {
   @Input() timelineData: ApiSportsCovidData[];
   @Input() yVariable: string;
   @Input('category') yVariableCategory: string;
+  @Input() currentDate: string;
 
   parseDate = d3.timeParse('%Y-%m-%d');
   private svgElement: HTMLElement;
