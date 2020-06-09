@@ -49,6 +49,16 @@ export class DataGraphComponent implements OnChanges {
 
     let _this = this;
 
+    var currentDay;
+    var filteredByDay = _this.timelineData.filter((item) => {
+      let temp = item.day.getDate().toString().padStart(2, '0')
+      if (temp !== currentDay) {
+        currentDay = temp;
+        return true;
+      }
+      return false;
+    });
+    
     // Define the line
     var valueline = d3.line<ApiSportsCovidData>()
     .x(function (d) {
@@ -56,7 +66,12 @@ export class DataGraphComponent implements OnChanges {
         return _this.chartProps.x(d.day.getTime());
       }
     })
-    .y(function (d) { return _this.chartProps.y(d[yVariable][yVariableCategory]); });
+    .y(function (d) { 
+      if (d[yVariable][yVariableCategory] === null) {
+        return _this.chartProps.y(d[yVariable][yVariableCategory]);
+      }
+        return _this.chartProps.y(parseInt(d[yVariable][yVariableCategory])); 
+     });
 
 
     // Define the line
@@ -82,7 +97,7 @@ export class DataGraphComponent implements OnChanges {
           return (d.day as Date).getTime();
       }));
     this.chartProps.y.domain([0, d3.max(this.timelineData, function (d) {
-      return d[yVariable][yVariableCategory];
+      return parseInt(d[yVariable][yVariableCategory]);
     })]);
 
     // Add the valueline2 path.
@@ -97,7 +112,7 @@ export class DataGraphComponent implements OnChanges {
       .attr('class', 'line line1')
       .style('stroke', 'rgba(192,29,29,1)')
       .style('fill', 'none')
-      .attr('d', valueline(_this.timelineData));
+      .attr('d', valueline(filteredByDay));
 
 
     // Add the X Axis
