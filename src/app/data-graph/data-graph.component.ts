@@ -35,7 +35,7 @@ export class DataGraphComponent implements OnChanges {
     this.formatDate();
 
     // Set the dimensions of the canvas / graph
-    var margin = { top: 30, right: 20, bottom: 30, left: 90 },
+    var margin = { top: 30, right: 20, bottom: 30, left: 70 },
     width = 500 - margin.left - margin.right,
     height = 270 - margin.top - margin.bottom;
 
